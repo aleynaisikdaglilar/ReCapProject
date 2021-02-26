@@ -15,8 +15,8 @@ namespace ConsoleUI
             UserManager userManager = new UserManager(new EfUserDal());
             CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
             RentalManager rentalManager = new RentalManager(new EfRentalDal());
-            userManager.Add(new User { FirstName = "Damla", LastName = "Şanlı", Email = "damla@gmail.com", Password = "123" });
-            customerManager.Add(new Customer { UserId = 3, CompanyName = "Şan" });
+            //userManager.Add(new User { FirstName = "Damla", LastName = "Şanlı", Email = "damla@gmail.com", Password = "123" });
+            //customerManager.Add(new Customer { UserId = 3, CompanyName = "Şan" });
 
             rentalManager.Add(new Rental {CarId = 2, CustomerId = 1, RentDate = DateTime.Now, ReturnDate = null });
             var result = rentalManager.GetRentalDetails();
