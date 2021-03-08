@@ -1,5 +1,8 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
+using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -19,25 +22,28 @@ namespace Business.Concrete
             _rentalDal = rentalDal;
         }
 
+        [ValidationAspect(typeof(RentalValidator))]
         public IResult Add(Rental rental)
         {
-            var tempRent = _rentalDal.Get(r => r.CarId == rental.CarId);
-            if (tempRent == null)
-            {
-                _rentalDal.Add(rental);
-                return new SuccessResult(Messages.RentalAdded);
-            }
-            else
-            {
-                if (tempRent.ReturnDate != null && tempRent.ReturnDate < rental.RentDate)
-                {
-                    _rentalDal.Delete(tempRent);
-                    _rentalDal.Add(rental);
-                    return new SuccessResult(Messages.RentalAdded);
-                }
-                return new ErrorResult(Messages.RentalReturnDateNull);
-            }
+            //var tempRent = _rentalDal.Get(r => r.CarId == rental.CarId);
+            //if (tempRent == null)
+            //{
+            //    _rentalDal.Add(rental);
+            //    return new SuccessResult(Messages.RentalAdded);
+            //}
+            //else
+            //{
+            //    if (tempRent.ReturnDate != null && tempRent.ReturnDate < rental.RentDate)
+            //    {
+            //        _rentalDal.Delete(tempRent);
+            //        _rentalDal.Add(rental);
+            //        return new SuccessResult(Messages.RentalAdded);
+            //    }
+            //    return new ErrorResult(Messages.RentalReturnDateNull);
+            //}
 
+            _rentalDal.Add(rental);
+            return new SuccessResult(Messages.RentalAdded);
         }
 
         public IResult Delete(Rental rental)

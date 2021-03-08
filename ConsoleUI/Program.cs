@@ -18,7 +18,7 @@ namespace ConsoleUI
             //userManager.Add(new User { FirstName = "Damla", LastName = "Şanlı", Email = "damla@gmail.com", Password = "123" });
             //customerManager.Add(new Customer { UserId = 3, CompanyName = "Şan" });
 
-            rentalManager.Add(new Rental {CarId = 2, CustomerId = 1, RentDate = DateTime.Now, ReturnDate = null });
+            rentalManager.Add(new Rental {CarId = 2, CustomerId = 1, RentDate = DateTime.Now, ReturnDate = DateTime.Now });
             var result = rentalManager.GetRentalDetails();
             Console.WriteLine(result.Message);
             if (result.Success == true)
